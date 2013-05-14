@@ -52,6 +52,18 @@
 				    <a href="index.php?logout" tabindex="5">Logout</a>
 				    </h6>
 				</div>
+				
+				<div>
+					<form id="UserOfferPostingForm" method="post" action="index.php" name="postOfferForm">        
+					    <label for="offer_title">Title</label>
+					    <input id="post_offer_input_offer_title" class="input-block-level" type="text" name="offer_title" />        
+					    <label for="offer_description">Description</label>
+					    <input id="post_offer_input_offer_description" class="input-block-level" type="text"" name="offer_description" />        
+					    <label for="offer_category">Category</label>
+					    <input id="post_offer_input_offer_category" class="input-block-level" type="text" name="offer_category" />                
+					    <input type="submit"  name="post_offer" value="post_offer" class="btn btn-primary btn-block" tabindex="3"/>
+					</form>
+				</div>
 
 				<!-- Enter greeting in these h4 tags -->
 
