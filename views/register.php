@@ -31,8 +31,8 @@ if ($registration->messages) {
 <meta name="author" content="xxx">
 <meta name="viewport" content="width=device-width">
 
-<link rel="stylesheet" type="text/css" href="/xxx.css" />
-<link href="/xxx2.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="xxx.css" />
+<link href="xxx2.css" rel="stylesheet">
 
 </head>
 <body>
@@ -44,8 +44,8 @@ if ($registration->messages) {
 	<div class="container" style="margin-top: 85px;">
 		<div class="centered margin-bottom">
 			
-			<!--Uncomment and insert image url below to place JunTao Logo above login form	-->
-			<a href="index.php" class="image-link"><img src="images/xxx.png" alt="Logo"></a>
+			<!--Uncomment and insert image url below to place Logo above login form	-->
+			<a href="index.php" class="image-link"><img src="xxx.png" alt="Logo"></a>
 			<!-- Logo Link ends here -->
 		</div>
 			

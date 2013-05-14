@@ -15,8 +15,12 @@ class Registration {
     private     $user_email                 = "";                       // user's email
     private     $user_password              = "";                       // user's password (what comes from POST)
     private     $user_password_hash         = "";                       // user's hashed and salted password
+    private     $user_activation_code       = "";  
+    private     $user_is_active             = "";
+    private		$code						= "";
     
     public      $registration_successful    = false;
+
 
     public      $errors                     = array();                  // collection of error messages
     public      $messages                   = array();                  // collection of success / neutral messages
@@ -116,14 +120,29 @@ class Registration {
 
                     $this->errors[] = "Sorry, that user name is already taken.<br/>Please choose another one.";
 
-                } else {
-
+                }
+                else {
+                	
+                	//generate random code
+    				$this->user_activation_code = rand(11111111,99999999);
+					$code = $this->user_activation_code;
+       
+					//send activation email
+					$to = $this->user_email;
+					$subject = "Activate your account";
+					$headers = "From: fossilfreeworld@gmail.com";
+					$body = "Yo $user_name,\n\nYou registered and need to activate your account. Click the link below or paste it into the URL bar of your browser\n\nhttp://fossilfreeworld.com/juntao/activate.php?user_activation_code=$code\n\nThanks!";
+								
+					if (!mail($to,$subject,$body,$headers))
+						echo "We couldn't sign you up at this time. Please try again later.";
+					else {
                     // write new users data into database
-                    $query_new_user_insert = $this->db_connection->query("INSERT INTO users (user_name, user_password_hash, user_email) VALUES('".$this->user_name."', '".$this->user_password_hash."', '".$this->user_email."')");
+                    $query_new_user_insert = $this->db_connection->query("INSERT INTO users (user_name, user_password_hash, user_email, user_activation_code, user_is_active) VALUES('".$this->user_name."', '".$this->user_password_hash."', '".$this->user_email."', '".$this->user_activation_code."', 0)");
+					}
 
                     if ($query_new_user_insert) {
 
-                        $this->messages[] = "Your account has been created successfully. You can now log in.";
+                        $this->messages[] = "You have been registered successfully. Please check your email ".$_POST['user_email']." to activate your account";
                         $this->registration_successful = true;
 
                     } else {
@@ -131,6 +150,10 @@ class Registration {
                         $this->errors[] = "Sorry, your registration failed. Please go back and try again.";
 
                     }
+					
+					
+					
+					
                 }
 
             } else {
